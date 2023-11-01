@@ -1,17 +1,19 @@
-import { createStore, bindActionCreators, combineReducers } from "redux";
 
+import { createStore, bindActionCreators, combineReducers, applyMiddleware } from "redux";
+import pkg from 'redux-logger';
+const { logger } = pkg;
 // now we have two reducers
 const CAKE_ORDERED = "CAKE_ORDER";
 const CAKE_RESTOCKED = "CAKE_RESTOCKED";
 const ICECREAM_ORDERED = "ICECREAM_ORDER";
 const ICECREAM_RESTOCKED = "ICECREAM_RESTOCKED";
-
 function orderCake() {
   return {
     type: CAKE_ORDERED,
     payload: 1,
   };
 }
+
 
 function orderIcecream(qty = 1) {
   return {
@@ -71,7 +73,7 @@ function iceReducer(state = initialIcecreamState, action) {
       return {
         ...state,
         numOfIce: state.numOfIce - action.payload,
-      };
+      };``
     case ICECREAM_RESTOCKED:
       return {
         ...state,
@@ -83,16 +85,14 @@ function iceReducer(state = initialIcecreamState, action) {
 }
 
 const combined = combineReducers({cakeReducer, iceReducer})
-
-let store = createStore(combined)
+// here we used the third part package with the help of applyMiddleware 
+let store = createStore(combined, applyMiddleware(logger))
 
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-// There may be additional use cases where it's helpful to subscribe as well.
+// There may be additional use cases where it's helpful to subscribe as well.[]
 
-const unsubscribe = store.subscribe(() =>
-  console.log("update store", store.getState())
-);
+const unsubscribe = store.subscribe(() =>{})
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
