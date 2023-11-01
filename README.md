@@ -1,2 +1,5 @@
 # ale-react
-Reso to cramp everything learned in react and, it's ecosystem.
+Repo to cramp everything learned in react and, it's ecosystem.
+
+## redux-toolkit-tutorial
+Going through the basics 
