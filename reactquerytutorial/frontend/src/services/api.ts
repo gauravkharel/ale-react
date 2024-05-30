@@ -2,18 +2,24 @@ import axios from "axios"
 import { Todo } from "../types/todo"
 
 const BASE_URL = "http://localhost:8080"
-const axiosIntstance = axios.create({baseURL: BASE_URL})
+const axiosInstance = axios.create({baseURL: BASE_URL})
 
 export const getTodosIds = async() => {
-    return (await axiosIntstance.get<Todo[]>('todos')).data.map((todo) => todo.id)
+    return (await axiosInstance.get<Todo[]>('todos')).data.map((todo) => todo.id)
 }
-
 
 export const getTodo = async(id: number) =>{
-    return (await axiosIntstance.get<Todo>(`todos/${id}`)).data
+    return (await axiosInstance.get<Todo>(`todos/${id}`)).data
 }
 
-
 export const createTodo =async (data:Todo) => {
-    await axiosIntstance.post('todos', data)
+    await axiosInstance.post('todos', data)
+}
+
+export const updateTodo =async (data:Todo) => {
+    await axiosInstance.put(`todos/${data.id}`, data)
+}
+
+export const deleteTodo = async(id:  number) => {
+    await axiosInstance.delete(`todos/${id}`)
 }
