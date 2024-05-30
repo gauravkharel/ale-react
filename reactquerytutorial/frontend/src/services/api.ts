@@ -12,3 +12,8 @@ export const getTodosIds = async() => {
 export const getTodo = async(id: number) =>{
     return (await axiosIntstance.get<Todo>(`todos/${id}`)).data
 }
+
+
+export const createTodo =async (data:Todo) => {
+    await axiosIntstance.post('todos', data)
+}
